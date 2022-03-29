@@ -1,0 +1,23 @@
+service: serverlessgram
+
+frameworkVersion: ">=1.1.0"
+
+custom:
+  bucket: 'serverlessgram-thiagodevvv'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+
+functions:
+  teste:
+    handler: serverlessgram.teste
+    events:
+      - http:
+          path: teste
+          method: get
+          cors: true
+plugins:
+  - serverless-offline
