@@ -13,11 +13,13 @@ provider:
 
 functions:
   teste:
-    handler: serverlessgram.teste
+    handler: serverlessgram.newPedido
     events:
       - http:
-          path: teste
-          method: get
+          path: newPedido
+          method: post
           cors: true
 plugins:
   - serverless-offline
+
+useDotenv: true
