@@ -21,5 +21,4 @@ functions:
           cors: true
 plugins:
   - serverless-offline
-
 useDotenv: true

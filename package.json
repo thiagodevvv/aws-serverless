@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "serverless-offline": "^8.5.0"
+  },
+  "dependencies": {
+    "joi": "^17.6.0",
+    "mongodb": "^4.4.1"
+  }
+}

@@ -4,7 +4,9 @@ const { schemaNewPedido } = require('./schema/newPedido.js')
 exports.newPedido = async event => {
     try {
         await client.connect()
-        const schema = schemaNewPedido.validate(JSON.parse(event.body))
+        const requestPedido = JSON.parse(event.body)
+        const schema = schemaNewPedido.validate(requestPedido)
+        requestPedido.status = 0
         if(schema.error) {
             return {
                 statusCode: 400,
@@ -12,15 +14,16 @@ exports.newPedido = async event => {
             }
         }
         const dbgram = await client.db('dbgram')
-        await dbgram.collection('pedidos').insertOne({pedido: ['X Salada']})
+        await dbgram.collection('pedidos').insertOne(requestPedido)
         return {
             statusCode: 200,
-            body: JSON.stringify({msg: 'Conectou no banco'})
+            body: JSON.stringify({msg: 'Pedido adicionado com sucesso.'})
         }
     }catch (err) {
+        console.log(err)
         return {
             statusCode: 500,
-            body: JSON.stringify({msg: 'erro ao se conectar ao banco'})
+            body: JSON.stringify({msg: err})
         }
     }
 }

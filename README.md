@@ -6,6 +6,6 @@
 
 
 Services: <br>
-    [ ] - Inserir pedido <br>
+    [ X ] - Inserir pedido <br>
     [ ] - Cancelar pedido <br>
     [ ] - Alterar status do pedido (status inicial = pedido => aceito/fazendo => Pronto p/ Entrega/Retirada) <br>
