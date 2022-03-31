@@ -27,3 +27,31 @@ exports.newPedido = async event => {
         }
     }
 }
+
+
+
+exports.addContato = async event => {
+	try {
+		await client.connect()
+		const dbgram = await client.db('dbgram')
+		const response = await dbgram.collection('contatos').findOne({ telefoneCliente: event.body.telefoneCliente })
+		if(!response) {
+            await dbgram.collection('contatos').insertOne(JSON.parse(event.body))
+            return {
+                statusCode: 200,
+                body: JSON.stringify({msg: 'Contato adicionado com sucesso'})
+            }
+        }
+        else
+            return {
+                statusCode: 200,
+                body: JSON.stringify({msg: 'Contato já existente'})
+            }
+	}catch(err) {
+		console.log(err)
+		return {
+			statusCode: 500,
+            body: JSON.stringify({msg: err})
+		}
+	}
+}

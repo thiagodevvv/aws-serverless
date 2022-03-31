@@ -12,11 +12,18 @@ provider:
   region: us-east-1
 
 functions:
-  teste:
+  newPedido:
     handler: serverlessgram.newPedido
     events:
       - http:
           path: newPedido
+          method: post
+          cors: true
+  addContato:
+    handler: serverlessgram.addContato
+    events:
+      - http:
+          path: addContato
           method: post
           cors: true
 plugins:
