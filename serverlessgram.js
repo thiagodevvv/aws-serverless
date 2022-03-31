@@ -1,6 +1,6 @@
 const { client } = require('./db/config.js')
 const { schemaNewPedido } = require('./schema/newPedido.js')
-
+const { setResponse } = require('./setResponse.js')
 exports.newPedido = async event => {
     try {
         await client.connect()
@@ -15,16 +15,11 @@ exports.newPedido = async event => {
         }
         const dbgram = await client.db('dbgram')
         await dbgram.collection('pedidos').insertOne(requestPedido)
-        return {
-            statusCode: 200,
-            body: JSON.stringify({msg: 'Pedido adicionado com sucesso.'})
-        }
+        return setResponse(200,{msg: 'Pedido enviado com sucesso'}) 
+
     }catch (err) {
         console.log(err)
-        return {
-            statusCode: 500,
-            body: JSON.stringify({msg: err})
-        }
+        return setResponse(500,{msg: err}) 
     }
 }
 
@@ -33,25 +28,19 @@ exports.newPedido = async event => {
 exports.addContato = async event => {
 	try {
 		await client.connect()
+		console.log(event.body.telefoneCliente)
 		const dbgram = await client.db('dbgram')
-		const response = await dbgram.collection('contatos').findOne({ telefoneCliente: event.body.telefoneCliente })
+		const paramsParse = JSON.parse(event.body)
+		const response = await dbgram.collection('contatos').findOne({ telefoneCliente: `${paramsParse.telefoneCliente}` })
+		console.log(response)
 		if(!response) {
-            await dbgram.collection('contatos').insertOne(JSON.parse(event.body))
-            return {
-                statusCode: 200,
-                body: JSON.stringify({msg: 'Contato adicionado com sucesso'})
-            }
-        }
-        else
-            return {
-                statusCode: 200,
-                body: JSON.stringify({msg: 'Contato já existente'})
-            }
+           		await dbgram.collection('contatos').insertOne(JSON.parse(event.body))
+            		return setResponse(200, {msg: 'Contato adicionado com sucesso'})       		 }
+       		 else 
+			return setResponse(200,{msg:'Contato já existente'})
+
 	}catch(err) {
 		console.log(err)
-		return {
-			statusCode: 500,
-            body: JSON.stringify({msg: err})
-		}
+		return setRespose(500, {msg: err})
 	}
 }
