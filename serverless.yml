@@ -19,6 +19,7 @@ functions:
           path: newPedido
           method: post
           cors: true
+
   addContato:
     handler: serverlessgram.addContato
     events:
@@ -26,6 +27,15 @@ functions:
           path: addContato
           method: post
           cors: true
+
+  cancelarPedido:
+    handler: serverlessgram.alterarStatusPedido
+    events:
+      - http:
+          path: alterarStatusPedido
+          method: post
+          cors: true
+
 plugins:
   - serverless-offline
 useDotenv: true

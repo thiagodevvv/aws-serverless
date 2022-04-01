@@ -8,4 +8,17 @@
 Services: <br>
     [ X ] - Inserir pedido <br>
     [ ] - Cancelar pedido <br>
-    [ ] - Alterar status do pedido (status inicial = pedido => aceito/fazendo => Pronto p/ Entrega/Retirada) <br>
+    [ ] - Alterar status do pedido (status inicial = pedido => aceito/fazendo => Pronto p/ Entrega/Retirada) <br><br><br>
+
+
+
+
+
+
+
+status<br>
+0 = pedido <br>
+1 = aceito/fazendo <br>
+2 = pronto p/ entrega || retirada <br>
+3 = cancelado
+

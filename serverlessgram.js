@@ -1,6 +1,8 @@
 const { client } = require('./db/config.js')
 const { schemaNewPedido } = require('./schema/newPedido.js')
 const { setResponse } = require('./setResponse.js')
+const { ObjectId } = require('mongodb')
+
 exports.newPedido = async event => {
     try {
         await client.connect()
@@ -28,7 +30,7 @@ exports.newPedido = async event => {
 exports.addContato = async event => {
 	try {
 		await client.connect()
-		console.log(event.body.telefoneCliente)
+
 		const dbgram = await client.db('dbgram')
 		const paramsParse = JSON.parse(event.body)
 		const response = await dbgram.collection('contatos').findOne({ telefoneCliente: `${paramsParse.telefoneCliente}` })
@@ -43,4 +45,21 @@ exports.addContato = async event => {
 		console.log(err)
 		return setRespose(500, {msg: err})
 	}
+}
+
+exports.alterarStatusPedido = async event => {
+	try {
+		const params  = JSON.parse(event.body)
+		if(!params.status || !params.id)
+			return setResponse(400, {msg: "Faltando params"})
+		await client.connect()
+		const dbgram = client.db('dbgram')
+		await dbgram.collection('pedidos').findOneAndUpdate({_id: ObjectId(`${params.id}`)}, { $set: { status: `${params.status}` } })
+		return setResponse(200, {msg: 'Status do pedido alterado com sucesso'})
+	}
+	catch(err){
+		console.log(err)
+		return setResponse(500, {msg:'Erro ao alterar status do pedido'})
+	}
+
 }
