@@ -25,8 +25,6 @@ exports.newPedido = async event => {
     }
 }
 
-
-
 exports.addContato = async event => {
 	try {
 		await client.connect()
@@ -62,4 +60,16 @@ exports.alterarStatusPedido = async event => {
 		return setResponse(500, {msg:'Erro ao alterar status do pedido'})
 	}
 
+}
+
+exports.buscaPedidos = async event => {
+	try {
+		await client.connect()
+		const dbgram = client.db('dbgram')
+		const response = await dbgram.collection('pedidos').find().toArray()
+		return setResponse(200, {msg: response })
+
+	}catch(err) {	
+		return setResponse(500, {msg: 'Erro ao buscar pedidos status 0'})
+	}
 }

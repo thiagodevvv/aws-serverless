@@ -35,6 +35,13 @@ functions:
           path: alterarStatusPedido
           method: post
           cors: true
+  buscaPedidos:
+    handler: serverlessgram.buscaPedidos
+    events:
+      - http:
+          path: buscaPedidos
+          method: post
+          cors: true
 
 plugins:
   - serverless-offline
