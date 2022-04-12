@@ -40,7 +40,7 @@ functions:
     events:
       - http:
           path: buscaPedidos
-          method: post
+          method: get
           cors: true
 
 plugins:
