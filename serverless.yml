@@ -28,7 +28,7 @@ functions:
           method: post
           cors: true
 
-  cancelarPedido:
+  alterarStatusPedido:
     handler: serverlessgram.alterarStatusPedido
     events:
       - http:
