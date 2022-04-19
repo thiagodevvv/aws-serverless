@@ -8,6 +8,8 @@ exports.newPedido = async event => {
         await client.connect()
         const requestPedido = JSON.parse(event.body)
         const schema = schemaNewPedido.validate(requestPedido)
+				const date = new Date()
+				requestPedido.data = date.toLocaleDateString('BR')
         requestPedido.status = 0
         if(schema.error) {
             return {
