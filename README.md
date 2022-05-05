@@ -1,24 +1,10 @@
 <h1>Projeto utilizando aws lambda functions com o framework serverless </h1><br><br>
-<h2>Objetivos<h2>
-    1. Administrar pedido de lanchonetes etc.. <br>
-    2. Integrar com o bot <br>
 
 
 
-Services: <br>
+
+Serviços: <br>
     [ X ] - Inserir pedido <br>
-    [ ] - Cancelar pedido <br>
-    [ ] - Alterar status do pedido (status inicial = pedido => aceito/fazendo => Pronto p/ Entrega/Retirada) <br><br><br>
+    [ X ] - Alterar status do pedido (status inicial = pedido => aceito/fazendo => Pronto p/ Entrega/Retirada) <br><br><br>
 
-
-
-
-
-
-
-status<br>
-0 = pedido <br>
-1 = aceito/fazendo <br>
-2 = pronto p/ entrega || retirada <br>
-3 = cancelado
 
